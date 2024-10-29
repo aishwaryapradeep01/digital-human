@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "servers": [
+        {
+            "url": "https://digital-human-v2.16ddc74lvtf3.us-south.codeengine.appdomain.cloud"
+        }
+    ],
+    "paths": {
+        "/askwx": {
+            "post": {
+                "summary": "Askwx",
+                "operationId": "askwx_askwx_post",
+                "requestBody": {
+    "content": {
+        "application/json": {
+            "schema": {
+                "type": "object",
+                "title": "User Data",
+                "properties": {
+                    "question": {
+                        "type": "string",
+                        "description": "User's question"
+                    }
+                },
+                "required": ["question"]
+            }
+        }
+    },
+    "required": true
+},
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "type": "object",
+                "title": "HTTPValidationError",
+                "properties": {
+                    "detail": {
+                        "type": "array",
+                        "title": "Detail",
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        }
+                    }
+                }
+            },
+            "ValidationError": {
+                "type": "object",
+                "title": "ValidationError",
+                "properties": {
+                    "loc": {
+                        "type": "array",
+                        "title": "Location",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ]
+            }
+        }
+    }
+}
